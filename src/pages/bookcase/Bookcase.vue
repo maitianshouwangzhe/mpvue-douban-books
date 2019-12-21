@@ -24,7 +24,6 @@
 
 <script>
   import bookList from '../../mock/data'
-  console.log('引入的本地数据', bookList)
   export default {
     data(){
       return {
