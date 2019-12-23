@@ -15,6 +15,7 @@
 <script>
   /*  引入所需的组件  */
   import BookList from '../booksList/BookList'
+  import ajax from "../../api";
   export default {
     data(){
       return {
@@ -30,20 +31,15 @@
         this.booksList = []
       },
       // 点击搜索
-      handleSearch(){
+      async handleSearch(){
         // 得到输入的值
         const inputValue = this.searchValue
-        // 封住为一个对象
+        // 封装为一个对象
         let data = {req: inputValue}
-        wx.request({
-          url: 'http://localhost:3000/searchBooks',
-          data: data,
-          success: (res) => {
-            console.log(res.data)
-            // 更新状态
-            this.booksList = res.data
-          }
-        })
+        // 向服务器发送请求，获取数据
+        const result = await ajax('/searchBooks', data)
+        // 更新状态
+        this.booksList = result
       },
     },
 
